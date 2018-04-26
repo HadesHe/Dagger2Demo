@@ -11,6 +11,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.zhanghehe.dagger2demo.data.model.User;
+import com.example.zhanghehe.dagger2demo.di.ApplicationContext;
+import com.example.zhanghehe.dagger2demo.di.DatabaseInfo;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -26,14 +28,10 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String USER_COLUMN_USER_UPDATED_AT="updated_at";
 
     @Inject
-    public DbHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public DbHelper(@ApplicationContext Context context, @DatabaseInfo String name,@DatabaseInfo int version) {
+        super(context, name, null, version);
     }
 
-    @Inject
-    public DbHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
-        super(context, name, factory, version, errorHandler);
-    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
